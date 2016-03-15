@@ -25,6 +25,7 @@
             <li><a href="#functions">Functions</a></li>
             <li><a href="#arrays">Arrays</a></li>
             <li><a href="#objects">Objects</a></li>
+            <li><a href="#examples">Realistic examples</a></li>
         </ol>
     </main>
     <section id="comments">
@@ -366,6 +367,47 @@ camera.takePhoto(); // call the takePhoto function with `this` = camera within t
 camera.filmLeft; // 19
 camera.photosTaken; // 1
 
+        </code>
+        </pre>
+    </section>
+
+    <section id="examples">
+        <h2>Realistic examples</h2>
+        <p class="wut">Code samples that are very similar to something you might write on an actual project that combine several of the above syntaxes.</p>
+        <pre>
+        <code class="javascript">
+// Adding a load event listener to the window object. The function in the second parameter will
+// be called whenever the event described by the first parameter occurs.
+//
+// window           = an object (available automatically in browsers)
+// addEventListener = a property of the window object (a function)
+// 'load'           = a string, passed as the first parameter of the addEventListener function
+// function() {}    = an anonymous function with no parameters
+window.addEventListener('load', function() {
+
+});
+
+// Get an element from the DOM and change its content.
+// 
+// var title            = create a new variable, called `title` (set to an object)
+// document             = an object (available automatically in browsers)
+// getElementById       = a property of the document object (a function)
+// 'title'              = a string, passed as the first parameter to getElementById
+// title.textContent    = access the `textContent` property of the `title` object
+// 'Welcome to...'      = a literal string
+var title = document.getElementById('title');
+title.textContent = 'Welcome to ACME Industries!';
+
+// Multiply all numbers in the original list by 5 then store in a variable array
+//
+// var answers          = create a new variable (set to an array)
+// [4, 8, 5, 1]         = a literal array with four elements
+// map                  = a property on the array object
+// function(num)        = an anonymous function that accepts one parameter, called `num`
+// return num * 5       = the body of the function, which multiplies the current num by 5 and returns the value
+var answers = [4, 8, 5, 1].map(function(num) {
+   return num * 5;
+});
         </code>
         </pre>
     </section>
