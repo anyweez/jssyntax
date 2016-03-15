@@ -1,0 +1,27 @@
+body {
+    font-family: 'Open Sans Condensed', sans-serif;
+}
+
+a,
+a:visited {
+    color: blue;
+}
+
+p {
+    font-size: 1.2em;
+    line-height: 1.5em;
+}
+
+li {
+    font-size: 1.4em;
+}
+
+code {
+    line-height: 1.8em;
+    font-size: 1.2em;
+}
+
+.hljs {
+    /* Overwrite the existing padding to make it larger */
+    padding-left: 60px;
+}

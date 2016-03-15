@@ -1,0 +1,375 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>JS syntax by example</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/highlight.js/9.2.0/styles/railscasts.min.css">
+    <link rel="stylesheet" href="syntax.css">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.2.0/highlight.min.js"></script>
+
+    <script type="text/javascript">
+        hljs.initHighlightingOnLoad();
+    </script>
+</head>
+
+<body>
+    <main>
+        <h1>Overview of Javascript syntax</h1>
+        <ol>
+            <li><a href="#comments">Comments</a></li>
+            <li><a href="#variables">Variables</a></li>
+            <li><a href="#data-types">Data types</a></li>
+            <li><a href="#conditionals">Conditionals</a></li>
+            <li><a href="#loops">Loops</a></li>
+            <li><a href="#functions">Functions</a></li>
+            <li><a href="#arrays">Arrays</a></li>
+            <li><a href="#objects">Objects</a></li>
+        </ol>
+    </main>
+    <section id="comments">
+        <h2>Comments</h2>
+        <p class="wut">Comments are how you help other people read your code (including Future You). If they don't seem worthwhile it's because you haven't suffered enough from lack of comments yet. Use them and Future You will thank Present You.</p>
+        <pre>
+        <code class="javascript">
+// This is a single-line comment. It extends through the end of the line no matter what.
+/*
+This is a multi-line comment.
+It'll continue until
+you
+stop 
+it
+*/
+        </code>
+        </pre>
+    </section>
+    <section id="variables">
+        <h2>Variables</h2>
+        <p class='wut'>Variables are named containers that hold information in them. The information they hold can change (vary) over time. You'd commonly use variables to store data needed to run your program that isn't known at development time (something like the number of items in a user's shopping cart, for example).</p>
+        <pre>
+        <code class="javascript">
+// Use the `var` keyword to create a new variable. 
+// The general form is:
+//    var &lt;variable_name&gt; = &lt;value&gt;;
+
+// Use quotes for strings. You can use single quotes or double quotes; the effect is the same.
+var name = 'Susan'; // var name = "Susan";
+// You create all variables the same way, regardless of the type.
+var age = 47;
+// Once a variable exists, you can refer to it without the `var` keyword.
+var name = "Susan";
+name = "Susan Thatcher";
+// Looking to get fancy? You can declare multiple variables in the same line.
+var father = 'Clarence', mother = 'Beatrice';
+        </code>
+        </pre>
+    </section>
+    <section id="data-types">
+        <h2>Data types</h2>
+        <p class='wut'>Every piece of data has a type. The type is based on the information that's stored in it and determines the types of things that can be done with it. There are both primitive data types (single-part data like strings, numbers, booleans) and complex data types (multi-part data like objects, including built-in objects like arrays).</p>
+        <pre>
+        <code class="javascript">
+/**
+ * Single and double quotes always indicate literal strings. 
+ * A string is a string is a string, regardless of whether it's stored in a variable.
+ */
+var company = 'ACME';
+company.length; // 4
+'ACME'.length; // 4
+
+// Numbers include whole numbers as well as decimals.
+var age = 47;
+age = 47.318; 
+age = 0.67; // Fun fact: if you're storing a number between zero and one, you need to put the zero in the one's place.
+
+// You can also create boolean variables.
+var paid = true;
+
+// ...or an object
+var myRide = {
+    make: 'Honda', // note that properties of an object also have types.
+    model: 'Civic',
+    year: 1998,
+};
+
+// ...or a function!
+var sum = function(numbers) {
+  // ... do stuff to find the sum of the provided numbers ...
+};
+
+// ...or even an array
+var fruits = ['apples', 'grapes', 'starfruit', 'oranges'];
+
+        </code>
+        </pre>
+    </section>
+    <section id="conditionals">
+        <h2>Conditionals</h2>
+        <p class="wut">Conditionals allow us to determine what code is executed based on a boolean condition. The most common form of conditional is an <code>if</code> statement.</p>
+        <pre>
+        <code class="javascript">
+// If and else are Batman and Robin.
+// Batman often shows up alone but Robin's not one to leave the house alone. You'll often see them together.
+// The general form for if's is:
+//   if (&lt;boolean condition&gt;) {
+//      // ... stuff to do only if the condition is true...
+//   }
+//
+// The general form for if/else's is:
+//   if (&lt;boolean condition&gt;) {
+//      // ... stuff to do only if the condition is true ...
+//   } else {
+//      // ... stuff to do only if the condition is false ...
+//   }
+//
+// Note that for if/else's one of the two paths will always happen, because a boolean
+// condition is always true or false (two possible options).
+
+var itemsInCart = 10;
+if (itemsInCart &gt; 0) {
+   // ... list the items ...
+} else {
+   // ... show 'empty cart' message ...
+}
+
+// or if you don't want to do anything in the else case, you can just have an if
+if (itemsInCart &gt; 5) {
+   // ... stuff that'll happen with five or more items in the cart ...
+}
+
+// or if you only want the else case, invert the operation so that you get the opposite boolean value
+if (itemsInCart &lt;= 5) {
+   // ... stuff that'll only happen with four or fewer items in the cart ...
+}
+        </code>
+        </pre>
+    </section>
+    <section id="loops">
+        <h2>Loops</h2>
+        <p class="wut">Loops allow us to run a block of code more than once (often a variable number of times). This can dramatically decrease the amount of repetition we need if we can identify patterns where we're trying to do the same thing multiple times. One common example of this is iterating through elements in an array.</p>
+        <pre>
+        <code class="javascript">
+// The only type of loop we've looked at thus far (and by far the most useful) is the for loop.
+// The general form for for loops is:
+//   for (&lt;what to do before starting&gt;; &lt;keep running? (boolean)&gt;; &lt;after each iteration&gt;) {
+//     ... anything between the start and end braces ({}) will be repeated ...
+//   }
+//
+//   &lt;what to do before starting&gt; is an expression defining something that should be done one time before the loop starts iterating.
+//      Common use case: initialize an index variable (var i = 0);
+//   &lt;keep running? (boolean)&gt; is a boolean expression, and the loop will continue running as long as the provided condition is true.
+//      Common use case: as long as index is lower than the maximum length of an array (i &lt; arr.length)
+//   &lt;after each iteration&gt; is an expression that'll be run after each iteration of the loop
+//      Common use case: increment the index variable (i++)
+var items = [5, 6, 7];
+var sum = 0;
+// The code in this loop will be run three times (the length of `items`) with a different
+// value of `i` each time. VERY useful pattern.
+for (var i = 0; i &lt; items.length; i++) {
+   sum = sum + items[i];
+}
+console.log(sum); // 18
+        </code>
+        </pre>
+    </section>
+
+    <section id="functions">
+        <h2>Functions</h2>
+        <p class="wut">Functions are how we bundle up a process (expressed in code) into a single, nameable unit. Functions are absurdly versatile and can be used for many, many things. Their syntax seems fairly complicated at first but the design of a function primarily revolves around specifying inputs and outputs along with a function body. Functions have their own scope (names for values that don't exist outside).</p>
+        <pre>
+        <code class="javascript">
+// Think of functions as another referenceable name, just like variables. Functions, like variables, need to be
+// created before they can be used. The 'value' of a function is a block of code (unlike most variables, 
+// which could contains numbers, strings, etc).
+// The general form for declaring a function is:
+//    function &lt;name&gt;(&lt;parameter1&gt;, &lt;parameter2&gt;, &lt;parameter3&gt;...) {
+//
+//    }
+//
+// Not all functions have names, just like not all numbers or strings are stored in variables. You can
+// define an 'anonymous function' with very similar syntax, sans name. Since it doesn't have a name you
+// need to define the function where it's going to be used (you can't refer to it later since it doesn't
+// have a name).
+//    function (&lt;parameter1&gt;, &lt;parameter2&gt;, &lt;parameter3&gt;...) {
+//
+//    }
+//
+// Aside from lacking a name, anonymous functions are identical to named functions in every respect.
+//
+// Functions have inputs ('parameters') and outputs ('return values'). Both are optional.
+//
+// Note that functions can have any number of parameters (including zero). They're all comma-separated.
+// You can think of parameters as local variables that have the values specified when the function is called.
+// It's pretty poor form to give variables names that are completely unrelated to their purpose, but for the
+// sake of example...
+function multiply(dog, moose) {
+  return dog * moose;
+}
+
+multiply(5, 7); // return 35 because dog = 5, moose = 7 within this function
+multiply(10, 3); // return 30 because dog = 10, moose = 3 within this function
+
+var count = 11;
+multiply(count, 2); // return 22 because dog = 11, moose = 2 within this function
+
+function hyperloop(x) {
+    return x * x;
+}
+
+hyperloop(3); // return 9 because x = 3
+hyperloop(11); // return 121 because x = 11
+
+function antique(age) {
+    return true;
+    
+    // We'll never get to any of this code because of the return statement above.
+    // The return keyword means "I'm done here; I found what I came for."
+    if (age &gt; 70) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+antique(16); // true
+antique(115); // true
+antique(-1); // true
+
+// You can also set variables equal to functions. Perhaps, for example, you have different
+// math operations, all that take two parameters.
+function add(first, second) {
+   return first + second;
+}
+
+function subtract(first, second) {
+   return first - second;
+}
+
+function multiply(first, second) {
+   return first * second;
+}
+
+function divide(first, second) {
+   return first / second;
+}
+
+var operation = add;
+operation(5, 4); // 9
+operation = multiply;
+operation(5, 4); // 20
+operation = subtract;
+operation(5, 4); // 1
+
+// An example of an anonymous function (often used in a higher-order function context).
+function perform(op, first, second) { // not anonymous
+   return op(first, second);
+}
+
+perform(function(val1, val2) {
+   return val1 * val2;
+}, 5, 4); // returns 20
+
+// You can also define anonymous functions but assign them to a variable (which 
+// effectively makes them...not...anonmyous).
+var say = function(phrase) {
+   console.log(phrase);
+};
+
+// That's effectively identical to:
+// function say(phrase) {
+//   console.log(phrase);
+// }
+
+say('hello!');
+
+        </code>
+        </pre>
+    </section>
+
+    <section id="arrays">
+        <h2>Arrays</h2>
+        <p class="wut">Secretly a type of object, arrays are worth calling out separately because they've got a ton of use cases that they support that are separate from object use cases. In particular, iteration is really easy to do with arrays.</p>
+        <pre>
+        <code class="javascript">
+// Arrays are a type of object, but are one of the only (the only?) object that has a special syntax.
+// That's how useful they are.
+var favoriteWords = ['birdbath', 'partridge', 'phenomenon'];
+
+// 'Index' into arrays by providing an integer inside of square brackets.
+favoriteWords[0]; // 'birdbath'
+
+var index = 2;
+favoriteWords[index]; // 'phenomenon'
+// Array is a type of object. It's got a bunch of properties associated with it.
+favoriteWords.length; // 3
+favoriteWords.push('kindle');
+favoriteWords.length; // 4
+
+var variety = [5, 'book', true];
+for (var i = 0; i &lt; variety.length; i++) {
+  // Output each element of the `variety` array one at a time
+  console.log(variety[i]); 
+}
+        </code>
+        </pre>
+    </section>
+
+    <section id="objects">
+        <h2>Objects</h2>
+        <p class="wut">Objects are the complex data type in Javascript and allow us to assemble multiple primitives and other objects into a single unit. Sometimes (often) it's easier to organize data using more than one string, number, function, etc and objects are designed specifically for this use case.</p>
+        <pre>
+        <code class="javascript">
+// There are several different ways you can initialize objects depending on what you want to do with them.
+// The simplest is by creating an 'object literal.'
+// The general form for an object literal is:
+// {
+//   &lt;name&gt;: &lt;value&gt;,
+//   &lt;name&gt;: &lt;value&gt;,
+//   &lt;name&gt;: &lt;value&gt;,
+// }
+//
+// Names must be strings (though they don't need to be written with quotes). Values can be any data type,
+// including other objects.
+var weather = {
+  temperature: 65, // use colons to separate name and value, and comma to separate properties.
+  wind: 11,
+  humidity: 0.55,
+  conditions: 'cloudy',
+};
+
+// Like arrays, you can access individual properties of objects. Instead of using a numeric index, you use
+// the name of the property.
+weather.temperature; // 65
+weather.humidity; // 0.55
+
+// You can also access with 'array notation' though this is less common. In this case you're using
+// square brackets as you would with arrays but provide a string (with quotes) as the index instead
+// of an integer.
+weather['temperature']; // 65
+
+// Objects can contain any sort of data, including functions and other objects.
+var camera = {
+  filmLeft: 20,
+  photosTaken: 0,
+  takePhoto: function() {
+    this.filmLeft--;
+    this.photosTaken++;
+  },
+  owner: {
+    name: 'Steve Erwin',
+    address: 'Sydney, Australia'
+  }
+};
+
+camera.filmLeft; // 20
+camera.takePhoto(); // call the takePhoto function with `this` = camera within the function
+camera.filmLeft; // 19
+camera.photosTaken; // 1
+
+        </code>
+        </pre>
+    </section>
+
+</body>
+
+</html>
